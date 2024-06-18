@@ -1,0 +1,101 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    transition: background-color 0.5s ease;
+}
+
+#groupsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.group {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.type-1 {
+    background-color: lightblue;
+}
+.type-2 {
+    background-color: lightgreen;
+}
+.type-3 {
+    background-color: lightcoral;
+}
+.type-4 {
+    background-color: lightgoldenrodyellow;
+}
+
+.principal, .container {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+#groupsList li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.container {
+    text-align: center;
+}
+
+#moveFactor {
+    margin-bottom: 20px;
+}
+
+#imagesContainer {
+    position: relative;
+    width: 100%;
+}
+
+.movableImage {
+    position: relative;
+    transition: transform 0.5s ease;
+    display: block;
+    margin-bottom: 10px;
+}
