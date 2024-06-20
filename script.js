@@ -1,110 +1,45 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const groups = []; 
+// Referências aos elementos do DOM
+const moveFactorInput = document.getElementById("moveFactor");
+const imagesContainer = document.getElementById("imagesContainer");
+const generateImagesButton = document.getElementById("generateImages");
+const imageCountInput = document.getElementById("imageCount");
 
-    // Form submission for creating groups
-    document.getElementById('groupForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
+// Função para gerar pares de imagens
+function generateImages(count) {
+    imagesContainer.innerHTML = ''; // Limpar imagens anteriores
+    for (let i = 0; i < count; i++) {
+        const imageContainer = document.createElement("div");
+        imageContainer.classList.add("imageContainer");
 
-        const groupName = document.getElementById('groupName').value;
-        const participants = document.getElementById('participants').value.split(',');
-        const groupType = document.getElementById('groupType').value;
+        // Segunda imagem (Avião)
+        const img2 = document.createElement("img");
+        img2.src = "Imagens8bits/aviao-removebg-preview.png"; // Caminho para a imagem do avião
+        img2.alt = "Avião";
+        img2.classList.add("movableImage", "plane");
+        imageContainer.appendChild(img2);
 
-        let groupDescription = '';
-        let bodyClass = '';
+        // Primeira imagem (Personagem)
+        const img1 = document.createElement("img");
+        img1.src = "Imagens8bits/CabecaChefe1.png"; // Caminho para a imagem do personagem
+        img1.alt = "Personagem";
+        img1.classList.add("movableImage", "character");
+        imageContainer.appendChild(img1);
 
-        switch (groupType) {
-            case '1':
-                groupDescription = 'Tipo 1: Grupo Pequeno';
-                bodyClass = 'type-1';
-                break;
-            case '2':
-                groupDescription = 'Tipo 2: Grupo Médio';
-                bodyClass = 'type-2';
-                break;
-            case '3':
-                groupDescription = 'Tipo 3: Grupo Grande';
-                bodyClass = 'type-3';
-                break;
-            case '4':
-                groupDescription = 'Tipo 4: Grupo Extra Grande';
-                bodyClass = 'type-4';
-                break;
-            default:
-                groupDescription = 'Tipo Desconhecido';
-                break;
-        }
-
-        document.body.classList.remove('type-1', 'type-2', 'type-3', 'type-4');
-
-        if (bodyClass) {
-            document.body.classList.add(bodyClass);
-        }
-
-        const group = {
-            name: groupName.trim(),
-            participants: participants.map(participant => participant.trim()),
-            description: groupDescription
-        };
-
-        groups.push(group);
-
-        updateGroupsList();
-        document.getElementById('groupForm').reset();
-    });
-
-    function updateGroupsList() {
-        const groupsList = document.getElementById('groupsList');
-        groupsList.innerHTML = '';
-
-        groups.forEach((group) => {
-            const groupItem = document.createElement('li');
-            groupItem.className = 'group';
-
-            const groupName = document.createElement('h3');
-            groupName.textContent = `Grupo: ${group.name}`;
-
-            const groupDescription = document.createElement('p');
-            groupDescription.textContent = group.description;
-
-            const groupParticipants = document.createElement('p');
-            groupParticipants.textContent = `Participantes: ${group.participants.join(', ')}`;
-
-            groupItem.appendChild(groupName);
-            groupItem.appendChild(groupDescription);
-            groupItem.appendChild(groupParticipants);
-
-            groupsList.appendChild(groupItem);
-        });
+        imagesContainer.appendChild(imageContainer);
     }
+}
 
-    // Image movement functionality
-    const moveFactorInput = document.getElementById("moveFactor");
-    const imagesContainer = document.getElementById("imagesContainer");
-    const generateImagesButton = document.getElementById("generateImages");
-    const imageCountInput = document.getElementById("imageCount");
+// Evento para gerar imagens com base na quantidade inserida
+generateImagesButton.addEventListener("click", () => {
+    const count = parseInt(imageCountInput.value) || 0;
+    generateImages(count);
+});
 
-    function generateImages(count) {
-        imagesContainer.innerHTML = ''; // Clear previous images
-        for (let i = 0; i < count; i++) {
-            const img = document.createElement("img");
-            img.src = "Imagens8bits/CabecaChefe1.png"; // Change to your image path
-            img.alt = "ImgTste";
-            img.classList.add("movableImage");
-            img.style.transform = 'translateX(0px)';
-            imagesContainer.appendChild(img);
-        }
-    }
-
-    generateImagesButton.addEventListener("click", () => {
-        const count = parseInt(imageCountInput.value) || 0;
-        generateImages(count);
-    });
-
-    moveFactorInput.addEventListener("input", () => {
-        const factor = parseFloat(moveFactorInput.value) || 0;
-        const images = document.querySelectorAll(".movableImage");
-        images.forEach((img, index) => {
-            img.style.transform = `translateX(${factor * 10}px)`;
-        });
+// Evento para mover imagens com base no fator de movimento inserido
+moveFactorInput.addEventListener("input", () => {
+    const factor = parseFloat(moveFactorInput.value) || 0;
+    const imageContainers = document.querySelectorAll(".imageContainer");
+    imageContainers.forEach((container) => {
+        container.style.transform = `translateX(${factor * 10}px)`;
     });
 });
