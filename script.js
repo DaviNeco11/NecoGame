@@ -2,7 +2,9 @@
 const moveFactorInput = document.getElementById("moveFactor");
 const imagesContainer = document.getElementById("imagesContainer");
 const generateImagesButton = document.getElementById("generateImages");
-const imageCountInput = document.getElementById("imageCount");
+const imageCountInput = document.getElementById("imageCount");// Contador do numero de imagens
+//Utilizar funcao zoho para contar registros e gerar as imagens com base nisso
+
 
 // Função para gerar pares de imagens
 function generateImages(count) {
